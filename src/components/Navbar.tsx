@@ -29,7 +29,7 @@ export const Navbar = () => {
             to={{
               pathname: '/people',
               search: searchParams.toString()
-                ? `?${searchParams.toString()}`
+                ? `${searchParams.toString()}`
                 : '',
             }}
           >
