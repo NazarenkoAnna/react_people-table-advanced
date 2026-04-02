@@ -2,6 +2,7 @@ import { NavLink, useSearchParams } from 'react-router-dom';
 
 export const Navbar = () => {
   const [searchParams] = useSearchParams();
+
   return (
     <nav
       data-cy="nav"

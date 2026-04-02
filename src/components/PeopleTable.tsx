@@ -154,12 +154,7 @@ export const PeopleTable: React.FC<Props> = ({ people, activeSlug }) => {
                   <td>
                     {person.motherName ? (
                       mother ? (
-                        <Link
-                          to={{ pathname: `/people/${mother?.slug}` }}
-                          className="has-text-danger"
-                        >
-                          {person.motherName}
-                        </Link>
+                        <PersonLink person={mother}/>
                       ) : (
                         person.motherName
                       )
@@ -170,9 +165,7 @@ export const PeopleTable: React.FC<Props> = ({ people, activeSlug }) => {
                   <td>
                     {person.fatherName ? (
                       father ? (
-                        <Link to={{ pathname: `/people/${father?.slug}` }}>
-                          {person.fatherName}
-                        </Link>
+                        <PersonLink person={father}/>
                       ) : (
                         person.fatherName
                       )

@@ -38,54 +38,52 @@ export const PeoplePage = () => {
   useEffect(() => {
     let filter = [...people];
 
-    if (filtered) {
-      if (query.trim() !== '') {
-        filter = filter.filter(
-          person =>
-            person.name.toLowerCase().includes(query.toLowerCase()) ||
-            person.fatherName?.toLowerCase().includes(query.toLowerCase()) ||
-            person.motherName?.toLowerCase().includes(query.toLowerCase()),
-        );
-      }
+    if (query.trim() !== '') {
+      filter = filter.filter(
+        person =>
+          person.name.toLowerCase().includes(query.toLowerCase()) ||
+          person.fatherName?.toLowerCase().includes(query.toLowerCase()) ||
+          person.motherName?.toLowerCase().includes(query.toLowerCase()),
+      );
+    }
 
-      if (sex !== 'all') {
-        filter = filter.filter(person => person.sex === sex);
-      }
+    if (sex !== 'all') {
+      filter = filter.filter(person => person.sex === sex);
+    }
 
-      if (centuries.length !== 0) {
-        filter = filter.filter(person => {
-          const century = Math.ceil(person.born / 100).toString();
+    if (centuries.length !== 0) {
+      filter = filter.filter(person => {
+        const century = Math.ceil(person.born / 100).toString();
 
-          return centuries.includes(century);
+        return centuries.includes(century);
+      });
+    }
+
+    switch (sort) {
+      case 'name':
+      case 'sex':
+        filter = filter.sort((first, second) => {
+          if (order === 'desc') {
+            return second[sort].localeCompare(first[sort]);
+          } else {
+            return first[sort].localeCompare(second[sort]);
+          }
         });
-      }
+        break;
 
-      switch (sort) {
-        case 'name':
-        case 'sex':
-          filter = filter.sort((first, second) => {
-            if (order === 'desc') {
-              return second[sort].localeCompare(first[sort]);
-            } else {
-              return first[sort].localeCompare(second[sort]);
-            }
-          });
-          break;
+      case 'born':
+      case 'died':
+        filter = filter.sort((firstPerson, secondPerson) => {
+          if (order === 'desc') {
+            return secondPerson[sort] - firstPerson[sort];
+          } else {
+            return firstPerson[sort] - secondPerson[sort];
+          }
+        });
+        break;
 
-        case 'born':
-        case 'died':
-          filter = filter.sort((firstPerson, secondPerson) => {
-            if (order === 'desc') {
-              return secondPerson[sort] - firstPerson[sort];
-            } else {
-              return firstPerson[sort] - secondPerson[sort];
-            }
-          });
-          break;
-
-        default:
-          break;
-      }
+      default:
+        break;
     }
 
     setFiltered(filter);
