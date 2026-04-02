@@ -1,6 +1,6 @@
 import React from 'react';
 import { Person } from '../types';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { PersonLink } from './PersonLink';
 
 type Props = {
@@ -154,7 +154,7 @@ export const PeopleTable: React.FC<Props> = ({ people, activeSlug }) => {
                   <td>
                     {person.motherName ? (
                       mother ? (
-                        <PersonLink person={mother}/>
+                        <PersonLink person={mother} />
                       ) : (
                         person.motherName
                       )
@@ -165,7 +165,7 @@ export const PeopleTable: React.FC<Props> = ({ people, activeSlug }) => {
                   <td>
                     {person.fatherName ? (
                       father ? (
-                        <PersonLink person={father}/>
+                        <PersonLink person={father} />
                       ) : (
                         person.fatherName
                       )
